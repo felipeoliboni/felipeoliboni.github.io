@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Road Trip: Flores da Cunha -> Montevideo (Direto)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .input-valor { @apply w-full bg-transparent text-right font-semibold outline-none focus:text-blue-600; }
+        .bg-road { background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)), url('https://images.unsplash.com/photo-1543783232-26038951557d?auto=format&fit=crop&q=80&w=1600'); background-size: cover; background-position: center; }
+        .tab-active { @apply border-b-4 border-blue-500 text-blue-600 bg-white; }
+        .hidden-tab { display: none; }
+        .city-card { @apply bg-white p-6 rounded-3xl shadow-sm border border-slate-200 transition-all hover:shadow-md hover:border-blue-100; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 pb-20">
+
+    <header class="bg-road text-white py-16 px-6 text-center">
+        <span class="bg-blue-600 text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest mb-4 inline-block italic">Road Trip</span>
+        <h1 class="text-3xl font-extrabold mb-2 tracking-tighter">Flores da Cunha <i class="fas fa-long-arrow-alt-right mx-2 text-blue-400"></i> Montevideo</h1>
+        <p class="text-slate-300 text-lg">Dia 1 - Roteiro Direto - 940km (13h30min)</p>
+        <h1 class="text-3xl font-extrabold mb-2 tracking-tighter">Montevideo <i class="fas fa-long-arrow-alt-right mx-2 text-blue-400"></i> Punta del Este</h1>
+        <p class="text-slate-300 text-lg">Dia 3 - Passando por Piriápolis - 150km (3h)</p>
+        <h1 class="text-3xl font-extrabold mb-2 tracking-tighter">Punta del Este <i class="fas fa-long-arrow-alt-right mx-2 text-blue-400"></i> Punta del Diablo</h1>
+        <p class="text-slate-300 text-lg">Dia 4 - Passando pelo Litoral - 220km (3h)</p>
+        <h1 class="text-3xl font-extrabold mb-2 tracking-tighter">Punta del Diablo <i class="fas fa-long-arrow-alt-right mx-2 text-blue-400"></i> Flores da Cunha</h1>
+        <p class="text-slate-300 text-lg">Dia 5 - Retorno - 700km (9h)</p>
+        <h1 class="text-3xl font-extrabold mb-2 tracking-tighter">Total em km</h1>
+        <p class="text-slate-300 text-lg">Aprox. 2400km/180L Combustível</p>
+        <p class="text-slate-300 text-lg">Dentro do BR: 540km (ida) + 660km (volta) Total: 1200km</p>
+        <p class="text-slate-300 text-lg">Dentro do UY: 900km</p>
+    </header>
+
+
+    <nav class="max-w-6xl mx-auto px-4 -mt-10">
+        <div class="bg-slate-100 rounded-2xl shadow-xl flex overflow-hidden border border-slate-200 p-1">
+            <button onclick="switchTab('custos')" id="btn-custos" class="flex-1 py-4 font-bold text-xs uppercase tracking-widest transition rounded-xl tab-active">
+                <i class="fas fa-wallet mr-2 text-sm"></i> Orçamento
+            </button>
+            <button onclick="switchTab('locais')" id="btn-locais" class="flex-1 py-4 font-bold text-xs uppercase tracking-widest transition rounded-xl text-slate-400 hover:text-slate-600">
+                <i class="fas fa-compass mr-2 text-sm"></i> Guia de Cidades
+            </button>
+        </div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto px-4 mt-12">
+        
+        <div id="tab-custos">
+            <div class="bg-white rounded-[2.5rem] shadow-2xl overflow-hidden border border-slate-200">
+                <div class="bg-slate-900 p-10 text-white flex flex-col md:flex-row justify-between items-center gap-6">
+                    <div>
+                        <h2 class="text-3xl font-black italic mb-2 tracking-tight">Finanças da Viagem</h2>
+                    </div>
+                    <div class="text-center md:text-right bg-blue-600/10 p-6 rounded-[2rem] border border-blue-500/20 backdrop-blur-sm">
+                        <span class="text-[10px] uppercase text-blue-400 block font-black tracking-widest mb-1">Custo Total Previsto</span>
+                        <span class="text-5xl font-black text-white" id="total-geral">R$ 0,00</span>
+                    </div>
+                </div>
+
+                <div class="p-6 md:p-12">
+                    <table class="w-full text-left">
+                        <tbody data-category="transporte">
+                            <tr class="bg-blue-50/50"><td colspan="2" class="py-4 px-6 font-black text-blue-900 text-sm tracking-widest uppercase"><i class="fas fa-gas-pump mr-2"></i> Combustível e Rodagem</td></tr>
+                            <tr class="border-b border-slate-100">
+                                <td class="py-4 px-8 text-sm text-slate-600 font-medium italic">Gasolina Brasil (Trajeto Longo)</td>
+                                <td class="py-4 px-4"><input type="number" class="input-valor item-valor" value="850.00"></td>
+                            </tr>
+                            <tr class="border-b border-slate-100">
+                                <td class="py-4 px-8 text-sm text-slate-600 font-medium italic">Gasolina Uruguai (R$ 12,00/litro)</td>
+                                <td class="py-4 px-4"><input type="number" class="input-valor item-valor" value="950.00"></td>
+                            </tr>
+                            <tr class="border-b border-slate-100">
+                                <td class="py-4 px-8 text-sm text-slate-600 font-medium italic">Pedágios (RS + Uruguai)</td>
+                                <td class="py-4 px-4"><input type="number" class="input-valor item-valor" value="520.00"></td>
+                            </tr>
+                            <tr class="bg-blue-600 text-white font-bold shadow-lg shadow-blue-200/50">
+                                <td class="py-3 px-8 text-[10px] uppercase tracking-widest">Subtotal Logística</td>
+                                <td class="py-3 px-4 text-right text-sm category-total font-black italic tracking-tighter">R$ 0,00</td>
+                            </tr>
+                        </tbody>
+
+                        <tr class="h-8"></tr>
+
+                        <tbody data-category="hospedagem">
+                            <tr class="bg-purple-50/50"><td colspan="2" class="py-4 px-6 font-black text-purple-900 text-sm tracking-widest uppercase"><i class="fas fa-bed mr-2"></i> Estadias</td></tr>
+                            <tr class="border-b border-slate-100">
+                                <td class="py-4 px-8 text-sm text-slate-600 font-medium italic">Montevideo (2 Noites)</td>
+                                <td class="py-4 px-4"><input type="number" class="input-valor item-valor" value="600.00"></td>
+                            </tr>
+                            <tr class="border-b border-slate-100">
+                                <td class="py-4 px-8 text-sm text-slate-600 font-medium italic">Punta del Este (1 Noite)</td>
+                                <td class="py-4 px-4"><input type="number" class="input-valor item-valor" value="450.00"></td>
+                            </tr>
+                            <tr class="border-b border-slate-100">
+                                <td class="py-4 px-8 text-sm text-slate-600 font-medium italic">Punta del Diablo (1 Noite)</td>
+                                <td class="py-4 px-4"><input type="number" class="input-valor item-valor" value="300.00"></td>
+                            </tr>
+                            <tr class="bg-purple-600 text-white font-bold shadow-lg shadow-purple-200/50">
+                                <td class="py-3 px-8 text-[10px] uppercase tracking-widest">Subtotal Hospedagem</td>
+                                <td class="py-3 px-4 text-right text-sm category-total font-black italic tracking-tighter">R$ 0,00</td>
+                            </tr>
+                        </tbody>
+
+                        <tr class="h-8"></tr>
+
+                        <tbody data-category="extras">
+                            <tr class="bg-emerald-50/50"><td colspan="2" class="py-4 px-6 font-black text-emerald-900 text-sm tracking-widest uppercase"><i class="fas fa-utensils mr-2"></i> Vivência & Burocracia</td></tr>
+                            <tr class="border-b border-slate-100">
+                                <td class="py-4 px-8 text-sm text-slate-600 font-medium italic">Alimentação</td>
+                                <td class="py-4 px-4"><input type="number" class="input-valor item-valor" value="1200.00"></td>
+                            </tr>
+                            <tr class="border-b border-slate-100">
+                                <td class="py-4 px-8 text-sm text-slate-600 font-medium italic">Carta Verde (Seguro Mercosul)</td>
+                                <td class="py-4 px-4"><input type="number" class="input-valor item-valor" value="120.00"></td>
+                            </tr>
+                            <tr class="bg-emerald-600 text-white font-bold shadow-lg shadow-emerald-200/50">
+                                <td class="py-3 px-8 text-[10px] uppercase tracking-widest">Subtotal Vivência</td>
+                                <td class="py-3 px-4 text-right text-sm category-total font-black italic tracking-tighter">R$ 0,00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab-locais" class="hidden-tab space-y-12">
+            
+            <section>
+                <div class="flex items-center gap-4 mb-6 border-b-2 border-red-100 pb-4">
+                    <span class="bg-red-600 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold text-xs">MVD</span>
+                    <h2 class="text-2xl font-black text-slate-900 tracking-tighter uppercase italic">Montevideo: Centro e História</h2>
+                </div>
+                <div class="grid md:grid-cols-3 gap-5">
+                    <div class="city-card"><h4 class="font-bold text-red-700 mb-1">Palacio Legislativo</h4><p class="text-[11px] text-slate-500 leading-snug">Um dos parlamentos mais belos do mundo. Arquitetura neoclássica imponente.</p></div>
+                    <div class="city-card"><h4 class="font-bold text-red-700 mb-1">Teatro Solis</h4><p class="text-[11px] text-slate-500 leading-snug">O principal palco do Uruguai. Visitas guiadas mostram os detalhes internos.</p></div>
+                    <div class="city-card"><h4 class="font-bold text-red-700 mb-1">Ciudad Vieja</h4><p class="text-[11px] text-slate-500 leading-snug">Bairro histórico com a Plaza Independencia, casarões e livrarias antigas.</p></div>
+                    <div class="city-card"><h4 class="font-bold text-red-700 mb-1">Artigas Mausoleum</h4><p class="text-[11px] text-slate-500 leading-snug">Localizado abaixo da Plaza Independencia, guarda as cinzas do herói nacional.</p></div>
+                    <div class="city-card"><h4 class="font-bold text-red-700 mb-1">Constitution Plaza</h4><p class="text-[11px] text-slate-500 leading-snug">Também conhecida como Plaza Matriz, coração da cidade colonial.</p></div>
+                    <div class="city-card"><h4 class="font-bold text-red-700 mb-1">Zabala Square</h4><p class="text-[11px] text-slate-500 leading-snug">Praça charmosa na Ciudad Vieja inspirada no estilo parisiense.</p></div>
+                    <div class="city-card"><h4 class="font-bold text-red-700 mb-1">Obelisk of 1830</h4><p class="text-[11px] text-slate-500 leading-snug">Monumento de 40 metros de altura na interseção da 18 de Julio e Bulevar Artigas.</p></div>
+                    <div class="city-card"><h4 class="font-bold text-red-700 mb-1">Mirador Panorámico</h4><p class="text-[11px] text-slate-500 leading-snug">No 22º andar da Intendência. Vista grátis de 360 graus da cidade.</p></div>
+                </div>
+            </section>
+
+            <section>
+                <div class="flex items-center gap-4 mb-6 border-b-2 border-emerald-100 pb-4">
+                    <span class="bg-emerald-600 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold text-xs">MVD</span>
+                    <h2 class="text-2xl font-black text-slate-900 tracking-tighter uppercase italic">Montevideo: Lazer e Orla</h2>
+                </div>
+                <div class="grid md:grid-cols-3 gap-5">
+                    <div class="city-card"><h4 class="font-bold text-emerald-700 mb-1">Mercado Agrícola (MAM)</h4><p class="text-[11px] text-slate-500 leading-snug">Mercado histórico restaurado com gastronomia local, vinhos e artesanato.</p></div>
+                    <div class="city-card"><h4 class="font-bold text-emerald-700 mb-1">Parque Rodó</h4><p class="text-[11px] text-slate-500 leading-snug">Grande parque urbano com lagos, feira aos domingos e o museu de artes visuais.</p></div>
+                    <div class="city-card"><h4 class="font-bold text-emerald-700 mb-1">National Museum of Visual Arts</h4><p class="text-[11px] text-slate-500 leading-snug">Dentro do Parque Rodó. Abriga o maior acervo de obras uruguaias do país.</p></div>
+                    <div class="city-card"><h4 class="font-bold text-emerald-700 mb-1">Botanical Garden</h4><p class="text-[11px] text-slate-500 leading-snug">No bairro Prado. Ideal para uma tarde tranquila rodeada de plantas nativas.</p></div>
+                    <div class="city-card"><h4 class="font-bold text-emerald-700 mb-1">Prado</h4><p class="text-[11px] text-slate-500 leading-snug">Bairro aristocrático famoso pelo Rosedal e pelos casarões antigos.</p></div>
+                    <div class="city-card"><h4 class="font-bold text-emerald-700 mb-1">Parque Capurro</h4><p class="text-[11px] text-slate-500 leading-snug">Parque histórico com terraços e escadarias com vista para a baía.</p></div>
+                    <div class="city-card"><h4 class="font-bold text-emerald-700 mb-1">Punta Carretas</h4><p class="text-[11px] text-slate-500 leading-snug">Área nobre com o farol e o shopping que funcionava como prisão antigamente.</p></div>
+                    <div class="city-card"><h4 class="font-bold text-emerald-700 mb-1">Castillo Pittamiglio</h4><p class="text-[11px] text-slate-500 leading-snug">Arquitetura alquimista na Rambla Gandhi. Labirintos e simbolismos.</p></div>
+                    <div class="city-card"><h4 class="font-bold text-emerald-700 mb-1">Montevideo Letters</h4><p class="text-[11px] text-slate-500 leading-snug">O letreiro icônico para foto clássica na curva da Rambla de Pocitos.</p></div>
+                    <div class="city-card"><h4 class="font-bold text-emerald-700 mb-1">Fortaleza del Cerro</h4><p class="text-[11px] text-slate-500 leading-snug">Ponto mais alto da cidade. Oferece a vista panorâmica mais completa da baía.</p></div>
+                </div>
+            </section>
+
+            <section>
+                <div class="flex items-center gap-4 mb-6 border-b-2 border-purple-100 pb-4">
+                    <span class="bg-purple-600 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold text-xs">PDE</span>
+                    <h2 class="text-2xl font-black text-slate-900 tracking-tighter uppercase italic">Punta del Este & Piriápolis</h2>
+                </div>
+                <div class="grid md:grid-cols-4 gap-4">
+                    <div class="bg-white p-4 rounded-3xl border border-purple-100 shadow-sm">
+                        <h4 class="font-black text-purple-700 text-sm mb-1">Casapueblo</h4>
+                        <p class="text-[10px] text-slate-500 leading-tight">Escultura habitável de Vilaró em Punta Ballena. Imperdível no pôr do sol.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-3xl border border-purple-100 shadow-sm">
+                        <h4 class="font-black text-purple-700 text-sm mb-1">The Fingers</h4>
+                        <p class="text-[10px] text-slate-500 leading-tight">A escultura 'La Mano' na Playa Brava. O maior cartão postal de Punta.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-3xl border border-purple-100 shadow-sm">
+                        <h4 class="font-black text-purple-700 text-sm mb-1">Museo Ralli</h4>
+                        <p class="text-[10px] text-slate-500 leading-tight">Coleção incrível de arte latino-americana e esculturas de Salvador Dalí.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-3xl border border-purple-100 shadow-sm">
+                        <h4 class="font-black text-purple-700 text-sm mb-1">San Antonio Hill</h4>
+                        <p class="text-[10px] text-slate-500 leading-tight">Em Piriápolis. Suba de teleférico para ter a melhor vista da orla.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-3xl border border-purple-100 shadow-sm">
+                        <h4 class="font-black text-purple-700 text-sm mb-1">Punta de las Salinas</h4>
+                        <p class="text-[10px] text-slate-500 leading-tight">Ponto exato onde o Rio da Prata encontra o Oceano Atlântico.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-3xl border border-purple-100 shadow-sm">
+                        <h4 class="font-black text-purple-700 text-sm mb-1">Plaza del Faro</h4>
+                        <p class="text-[10px] text-slate-500 leading-tight">O farol de 1860 no centro histórico. Local charmoso e calmo.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-3xl border border-purple-100 shadow-sm">
+                        <h4 class="font-black text-purple-700 text-sm mb-1">La Glorieta</h4>
+                        <p class="text-[10px] text-slate-500 leading-tight">Mirante clássico no porto para ver o movimento dos iates e leões marinhos.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-3xl border border-purple-100 shadow-sm">
+                        <h4 class="font-black text-purple-700 text-sm mb-1">Laguna Garzón Bridge</h4>
+                        <p class="text-[10px] text-slate-500 leading-tight">A ponte circular famosa na estrada que liga Maldonado à Rocha.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <div class="flex items-center gap-4 mb-6 border-b-2 border-orange-100 pb-4">
+                    <span class="bg-orange-500 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold text-xs">PDD</span>
+                    <h2 class="text-2xl font-black text-slate-900 tracking-tighter uppercase italic">Punta del Diablo & Rocha</h2>
+                </div>
+                <div class="grid md:grid-cols-3 gap-5">
+                    <div class="city-card border-l-8 border-l-orange-500">
+                        <h4 class="font-bold text-slate-800 mb-1">Fortaleza de Santa Teresa</h4>
+                        <p class="text-[11px] text-slate-500 leading-snug italic">Fortificação colonial gigantesca preservada dentro de um parque nacional imenso.</p>
+                    </div>
+                    <div class="city-card border-l-8 border-l-orange-500">
+                        <h4 class="font-bold text-slate-800 mb-1">Cabo Polonio (Ingresso)</h4>
+                        <p class="text-[11px] text-slate-500 leading-snug italic">Local de embarque nos caminhões 4x4 para visitar a vila sem luz elétrica.</p>
+                    </div>
+                    <div class="city-card border-l-8 border-l-orange-500">
+                        <h4 class="font-bold text-slate-800 mb-1">Pista de Emergência</h4>
+                        <p class="text-[11px] text-slate-500 leading-snug italic">Trecho reto e largo da rodovia próximo à Diablo usado como pista de pouso.</p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+    </main>
+
+    <script>
+        // Sistema de Abas
+        function switchTab(tab) {
+            const custos = document.getElementById('tab-custos');
+            const locais = document.getElementById('tab-locais');
+            const btnCustos = document.getElementById('btn-custos');
+            const btnLocais = document.getElementById('btn-locais');
+
+            if (tab === 'custos') {
+                custos.classList.remove('hidden-tab');
+                locais.classList.add('hidden-tab');
+                btnCustos.classList.add('tab-active');
+                btnCustos.classList.remove('text-slate-400');
+                btnLocais.classList.add('text-slate-400');
+                btnLocais.classList.remove('tab-active');
+            } else {
+                custos.classList.add('hidden-tab');
+                locais.classList.remove('hidden-tab');
+                btnLocais.classList.add('tab-active');
+                btnLocais.classList.remove('text-slate-400');
+                btnCustos.classList.add('text-slate-400');
+                btnCustos.classList.remove('tab-active');
+            }
+        }
+
+        // Calculadora de Totais
+        function updateTotals() {
+            let grandTotal = 0;
+            const categories = document.querySelectorAll('tbody[data-category]');
+
+            categories.forEach(category => {
+                let categorySum = 0;
+                category.querySelectorAll('.item-valor').forEach(input => {
+                    categorySum += parseFloat(input.value) || 0;
+                });
+
+                const subtotalDisplay = category.querySelector('.category-total');
+                subtotalDisplay.innerText = categorySum.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+                grandTotal += categorySum;
+            });
+
+            document.getElementById('total-geral').innerText = grandTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        }
+
+        document.querySelectorAll('.item-valor').forEach(input => {
+            input.addEventListener('input', updateTotals);
+        });
+
+        window.onload = updateTotals;
+    </script>
+</body>
+</html>
