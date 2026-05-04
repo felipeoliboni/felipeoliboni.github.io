@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Felipe Oliboni</title>
+    <title>Currículo - Felipe Oliboni</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22black%22/><text y=%22.9em%22 font-size=%2280%22 fill=%22%2300ffff%22 font-family=%22monospace%22 font-weight=%22bold%22>>_</text></svg>">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
@@ -17,7 +17,6 @@
             overflow-x: hidden;
         }
 
-        /* Fundo da Placa Mãe */
         #circuit-bg {
             position: fixed;
             top: 0;
@@ -50,19 +49,18 @@
             transform: translate(-4px, -4px);
         }
 
-        .pixel-button:active {
-            transform: translate(0px, 0px);
-            box-shadow: none;
-        }
-
-        .email-link {
+        .back-link {
+            position: absolute;
+            top: 20px;
+            left: 20px;
             font-size: 10px;
             color: #ff00ff;
             text-decoration: none;
             border-bottom: 2px solid #ff00ff;
+            z-index: 30;
         }
 
-        .email-link:hover {
+        .back-link:hover {
             color: #fff;
             border-color: #fff;
         }
@@ -87,19 +85,63 @@
             100% { opacity: 0.99; }
         }
 
+        .resume-section {
+            background: rgba(0, 0, 0, 0.6);
+            border: 2px solid #00ffff;
+            padding: 20px;
+            margin: 20px 0;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .section-title {
+            color: #ff00ff;
+            font-size: 14px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .item-title {
+            color: #fff;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+
+        .item-subtitle {
+            font-size: 10px;
+            opacity: 0.8;
+            margin-bottom: 10px;
+        }
+
+        .item-content {
+            font-size: 10px;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
         main {
             position: relative;
             z-index: 20;
         }
+
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        li::before {
+            content: "> ";
+            color: #ff00ff;
+        }
     </style>
 </head>
-<body class="flex flex-col items-center justify-center min-h-screen flicker">
+<body class="flex flex-col items-center justify-start min-h-screen flicker py-20 px-4">
     <canvas id="circuit-bg"></canvas>
     <div class="scanline"></div>
 
     <!-- Link de Contacto e Switcher de Idioma -->
     <div class="fixed top-[20px] right-[20px] flex flex-col items-end gap-2 z-30">
-        <a href="mailto:foliboni@gmail.com" class="email-link tracking-tighter uppercase" data-i18n="contact">
+        <a href="mailto:foliboni@gmail.com" class="text-[10px] text-[#ff00ff] border-bottom-2 border-[#ff00ff] tracking-tighter uppercase decoration-none" style="border-bottom: 2px solid #ff00ff;" data-i18n="contact">
             Contact_Me
         </a>
         <div class="flex gap-3 text-[10px] tracking-tighter">
@@ -109,32 +151,100 @@
         </div>
     </div>
 
-    <!-- Conteúdo Central -->
-    <main class="text-center p-6 bg-black/40 backdrop-blur-sm rounded-lg border-4 border-cyan-500/20 py-12 px-8">
-        <div class="mb-8">
-            <h1 class="text-2xl md:text-4xl mb-4 tracking-tighter uppercase">
-                Felipe Oliboni
-            </h1>
-        </div>
+    <a href="index.html" class="back-link tracking-tighter uppercase" data-i18n="back">
+        < Back
+    </a>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-sm mx-auto">
-            <a href="https://linkedin.com/in/felipeoliboni" target="_blank" class="pixel-button uppercase">
-                LinkedIn
+    <main class="text-center w-full max-w-4xl flex flex-col items-center">
+        <h1 class="text-2xl md:text-3xl mb-4 tracking-tighter uppercase">
+            Felipe Oliboni
+        </h1>
+        <p class="text-[10px] mb-12 opacity-80 uppercase tracking-widest">
+            DevOps | SRE | Infrastructure Analyst
+        </p>
+
+        <!-- Resumo -->
+        <section class="resume-section text-left">
+            <h2 class="section-title" data-i18n="summary_title"># Resumo</h2>
+            <p class="item-content" data-i18n="summary_text">
+                Analista de Infraestrutura focado na cultura DevOps e práticas de SRE. Com base sólida em administração Linux e experiência em ambientes Cloud, atuo no gerenciamento de recursos de infraestrutura. Tenho experiência com a implementação de containers, suporte a fluxos de CI/CD e otimização de custos operacionais.
+            </p>
+        </section>
+
+        <!-- Habilidades -->
+        <section class="resume-section text-left">
+            <h2 class="section-title" data-i18n="skills_title"># Habilidades</h2>
+            <div class="mb-4">
+                <h3 class="item-title" data-i18n="skills_tech">Técnicas:</h3>
+                <p class="item-content">Google Cloud Platform, AWS, Linux, Kubernetes, Docker, Git, CI/CD, Terraform, Python, SQL, GSuite, n8n.</p>
+            </div>
+            <div>
+                <h3 class="item-title" data-i18n="skills_lang">Idiomas:</h3>
+                <p class="item-content"><span data-i18n="lang_pt">Português (Nativo)</span>, <span data-i18n="lang_en">Inglês (C1)</span>, <span data-i18n="lang_it">Italiano (B1)</span>.</p>
+            </div>
+        </section>
+
+        <!-- Experiência -->
+        <section class="resume-section text-left">
+            <h2 class="section-title" data-i18n="exp_title"># Experiência</h2>
+            <div class="mb-8">
+                <div class="flex justify-between items-start flex-wrap gap-2 mb-2">
+                    <h3 class="item-title">Incentiv</h3>
+                    <span class="text-[10px] opacity-60">Jun. 2022 - Presente</span>
+                </div>
+                <p class="item-subtitle" data-i18n="exp_incentiv_role">Analista de Infraestrutura (Remoto)</p>
+                <ul class="item-content">
+                    <li>Monitoramento e manutenção da infraestrutura no Google Cloud Platform.</li>
+                    <li>Administração de servidores Linux em produção, garantindo estabilidade.</li>
+                    <li>Auditoria e ajuste de recursos no GCP, reduzindo custos em 75%.</li>
+                    <li>Implementação de fluxos CI/CD no GitLab.</li>
+                </ul>
+            </div>
+            <div>
+                <div class="flex justify-between items-start flex-wrap gap-2 mb-2">
+                    <h3 class="item-title">SCA Contabilidade</h3>
+                    <span class="text-[10px] opacity-60">Fev. 2022 - Jun. 2022</span>
+                </div>
+                <p class="item-subtitle" data-i18n="exp_sca_role">Analista de Infraestrutura (Florianópolis, SC)</p>
+                <ul class="item-content">
+                    <li>Reorganização de políticas de setor, diretórios e permissões.</li>
+                    <li>Suporte técnico para infraestrutura local, rede e Active Directory.</li>
+                    <li>Resolução de problemas com tempo médio inferior a 30 minutos.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Educação -->
+        <section class="resume-section text-left">
+            <h2 class="section-title" data-i18n="edu_title"># Educação</h2>
+            <div class="mb-4">
+                <h3 class="item-title">Universidade Cruzeiro do Sul</h3>
+                <p class="item-subtitle" data-i18n="edu_cloud">CST em Computação em Nuvem (Concl: Dez. 2025)</p>
+            </div>
+            <div>
+                <h3 class="item-title">Universidade Federal de Santa Catarina</h3>
+                <p class="item-subtitle" data-i18n="edu_physics">Bacharelado em Física (Concl: Ago. 2022)</p>
+            </div>
+        </section>
+
+        <!-- Certificações -->
+        <section class="resume-section text-left">
+            <h2 class="section-title" data-i18n="cert_title"># Certificações</h2>
+            <ul class="item-content">
+                <li>GCP - Associate Cloud Engineer</li>
+                <li>AWS - Certified Cloud Practitioner</li>
+                <li>GitHub - GitHub Foundations</li>
+            </ul>
+        </section>
+
+        <!-- <div class="mt-12">
+            <a href="felipe-oliboni-br.pdf" target="_blank" class="pixel-button uppercase" data-i18n="download_pdf">
+                Download PDF
             </a>
-            <a href="https://github.com/felipeoliboni" target="_blank" class="pixel-button uppercase">
-                GitHub
-            </a>
-            <a href="resume.html" class="pixel-button uppercase" data-i18n="resume">
-                Currículo
-            </a>
-            <a href="projects.html" class="pixel-button uppercase" data-i18n="projects">
-                Projetos
-            </a>
-        </div>
+        </div> -->
     </main>
 
     <script src="i18n.js"></script>
-
 
     <script>
         const canvas = document.getElementById('circuit-bg');
@@ -190,7 +300,6 @@
                 }
                 ctx.stroke();
 
-                // Desenhar o "bit" a correr no caminho
                 const posIndex = Math.floor((this.age / this.maxAge) * (this.path.length - 1));
                 if(posIndex < this.path.length - 1) {
                     const p1 = this.path[posIndex];
@@ -221,7 +330,6 @@
             ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
             ctx.fillRect(0, 0, width, height);
             
-            // Desenhar grelha pixelada de fundo (subtil)
             ctx.strokeStyle = '#111';
             ctx.lineWidth = 1;
             for(let x=0; x<width; x+=cellSize) {

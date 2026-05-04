@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Felipe Oliboni</title>
+    <title>Projetos - Felipe Oliboni</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22black%22/><text y=%22.9em%22 font-size=%2280%22 fill=%22%2300ffff%22 font-family=%22monospace%22 font-weight=%22bold%22>>_</text></svg>">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
@@ -17,7 +17,6 @@
             overflow-x: hidden;
         }
 
-        /* Fundo da Placa Mãe */
         #circuit-bg {
             position: fixed;
             top: 0;
@@ -55,14 +54,18 @@
             box-shadow: none;
         }
 
-        .email-link {
+        .back-link {
+            position: absolute;
+            top: 20px;
+            left: 20px;
             font-size: 10px;
             color: #ff00ff;
             text-decoration: none;
             border-bottom: 2px solid #ff00ff;
+            z-index: 30;
         }
 
-        .email-link:hover {
+        .back-link:hover {
             color: #fff;
             border-color: #fff;
         }
@@ -87,19 +90,34 @@
             100% { opacity: 0.99; }
         }
 
+        .project-card {
+            background: rgba(0, 0, 0, 0.6);
+            border: 2px solid #00ffff;
+            padding: 20px;
+            margin: 20px 0;
+            width: 100%;
+            max-width: 600px;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            border-color: #ff00ff;
+            box-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
+        }
+
         main {
             position: relative;
             z-index: 20;
         }
     </style>
 </head>
-<body class="flex flex-col items-center justify-center min-h-screen flicker">
+<body class="flex flex-col items-center justify-start min-h-screen flicker py-20 px-4">
     <canvas id="circuit-bg"></canvas>
     <div class="scanline"></div>
 
     <!-- Link de Contacto e Switcher de Idioma -->
     <div class="fixed top-[20px] right-[20px] flex flex-col items-end gap-2 z-30">
-        <a href="mailto:foliboni@gmail.com" class="email-link tracking-tighter uppercase" data-i18n="contact">
+        <a href="mailto:foliboni@gmail.com" class="text-[10px] text-[#ff00ff] border-bottom-2 border-[#ff00ff] tracking-tighter uppercase decoration-none" style="border-bottom: 2px solid #ff00ff;" data-i18n="contact">
             Contact_Me
         </a>
         <div class="flex gap-3 text-[10px] tracking-tighter">
@@ -109,32 +127,45 @@
         </div>
     </div>
 
-    <!-- Conteúdo Central -->
-    <main class="text-center p-6 bg-black/40 backdrop-blur-sm rounded-lg border-4 border-cyan-500/20 py-12 px-8">
-        <div class="mb-8">
-            <h1 class="text-2xl md:text-4xl mb-4 tracking-tighter uppercase">
-                Felipe Oliboni
-            </h1>
+    <a href="index.html" class="back-link tracking-tighter uppercase" data-i18n="back">
+        < Back
+    </a>
+
+    <main class="text-center w-full max-w-4xl flex flex-col items-center">
+        <h1 class="text-2xl md:text-4xl mb-12 tracking-tighter uppercase" data-i18n="my_projects">
+            Meus Projetos
+        </h1>
+
+        <div class="project-card text-left">
+            <h2 class="text-lg md:text-xl mb-4 text-[#ff00ff]" data-i18n="home_lab_title"># Homelab</h2>
+            <p class="text-[10px] md:text-xs leading-loose opacity-90 mb-4" data-i18n="home_lab_desc">
+                Ecossistema de servidores domésticos focado em autonomia digital e DevOps.
+            </p>
+            <ul class="text-[9px] md:text-[10px] leading-relaxed opacity-80 list-none">
+                <li>> Virtualização com Proxmox VE</li>
+                <li>> Containers Docker & Orquestração básica</li>
+                <li>> Monitoramento com Prometheus e Grafana</li>
+                <li>> Tailscale e Cloudflare Tunnel para acesso seguro remoto</li>
+            </ul>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-sm mx-auto">
-            <a href="https://linkedin.com/in/felipeoliboni" target="_blank" class="pixel-button uppercase">
-                LinkedIn
-            </a>
-            <a href="https://github.com/felipeoliboni" target="_blank" class="pixel-button uppercase">
-                GitHub
-            </a>
-            <a href="resume.html" class="pixel-button uppercase" data-i18n="resume">
-                Currículo
-            </a>
-            <a href="projects.html" class="pixel-button uppercase" data-i18n="projects">
-                Projetos
-            </a>
+        <div class="project-card text-left">
+            <h2 class="text-lg md:text-xl mb-4 text-[#ff00ff]" data-i18n="portal_title"># Portal do Estudante</h2>
+            <p class="text-[10px] md:text-xs leading-loose opacity-90 mb-4" data-i18n="portal_desc">
+                Sistema Full-Stack para centralização de informações acadêmicas e gestão de fluxo estudantil.
+            </p>
+            <ul class="text-[9px] md:text-[10px] leading-relaxed opacity-80 list-none">
+                <li>> Sistema de gerenciamento de matrículas, alunos e turmas para professores</li>
+                <li>> Repositório de materiais de estudo por disciplina</li>
+                <li>> Backend escalável com Node.js e banco SQL</li>
+                <li>> Interface responsiva focada na experiência do usuário</li>
+                <li>> Pipeline de automação via GitHub Actions para deploy via Docker</li>
+            </ul>
         </div>
+
     </main>
 
     <script src="i18n.js"></script>
-
 
     <script>
         const canvas = document.getElementById('circuit-bg');
@@ -190,7 +221,6 @@
                 }
                 ctx.stroke();
 
-                // Desenhar o "bit" a correr no caminho
                 const posIndex = Math.floor((this.age / this.maxAge) * (this.path.length - 1));
                 if(posIndex < this.path.length - 1) {
                     const p1 = this.path[posIndex];
@@ -221,7 +251,6 @@
             ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
             ctx.fillRect(0, 0, width, height);
             
-            // Desenhar grelha pixelada de fundo (subtil)
             ctx.strokeStyle = '#111';
             ctx.lineWidth = 1;
             for(let x=0; x<width; x+=cellSize) {
