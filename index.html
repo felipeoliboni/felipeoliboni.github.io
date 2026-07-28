@@ -99,9 +99,21 @@
 
     <!-- Link de Contacto e Switcher de Idioma -->
     <div class="fixed top-[20px] right-[20px] flex flex-col items-end gap-2 z-30">
-        <a href="mailto:foliboni@gmail.com" class="email-link tracking-tighter uppercase" data-i18n="contact">
-            Contact_Me
-        </a>
+        <div class="relative inline-block text-right">
+            <button onclick="toggleContactMenu(event)" class="email-link tracking-tighter uppercase cursor-pointer bg-transparent border-0 p-0 flex items-center gap-1.5 ml-auto" data-i18n="contact">
+                Contact_Me <span id="contact-arrow" class="text-[8px] inline-block transition-transform duration-200">▼</span>
+            </button>
+            <div id="contact-dropdown" class="max-h-0 opacity-0 overflow-hidden transition-all duration-300 ease-in-out absolute right-0 mt-2 w-56 z-40 text-left shadow-[4px_4px_0px_#ff00ff]">
+                <div class="border-2 border-[#ff00ff] p-3 flex flex-col gap-2 bg-black/95">
+                    <a href="mailto:foliboni@gmail.com" target="_blank" class="text-[10px] text-[#00ffff] hover:text-white flex items-center gap-2 py-1.5 px-2 hover:bg-[#ff00ff]/20 transition-colors uppercase border-b border-[#ff00ff]/30">
+                        <span class="text-[#ff00ff]">></span> Email
+                    </a>
+                    <a href="https://wa.me/5554999777842" target="_blank" class="text-[10px] text-[#25D366] hover:text-white flex items-center gap-2 py-1.5 px-2 hover:bg-[#25D366]/20 transition-colors uppercase">
+                        <span class="text-[#25D366]">></span> WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
         <div class="flex gap-3 text-[10px] tracking-tighter">
             <button onclick="setLanguage('pt')" class="lang-btn text-[#ff00ff] hover:text-white transition-colors cursor-pointer" id="lang-pt">PT</button>
             <button onclick="setLanguage('en')" class="lang-btn text-[#ff00ff] hover:text-white transition-colors cursor-pointer" id="lang-en">EN</button>
@@ -117,24 +129,53 @@
             </h1>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-sm mx-auto">
-            <a href="https://linkedin.com/in/felipeoliboni" target="_blank" class="pixel-button uppercase">
+        <div class="flex flex-row flex-nowrap justify-center items-center gap-2 md:gap-4 max-w-2xl mx-auto">
+            <a href="https://linkedin.com/in/felipeoliboni" target="_blank" class="pixel-button uppercase !m-0 whitespace-nowrap text-[10px] md:text-xs px-3 py-2.5 md:px-5 md:py-3">
                 LinkedIn
             </a>
-            <a href="https://github.com/felipeoliboni" target="_blank" class="pixel-button uppercase">
+            <a href="https://github.com/felipeoliboni" target="_blank" class="pixel-button uppercase !m-0 whitespace-nowrap text-[10px] md:text-xs px-3 py-2.5 md:px-5 md:py-3">
                 GitHub
             </a>
-            <a href="resume.html" class="pixel-button uppercase" data-i18n="resume">
+            <a href="resume.html" class="pixel-button uppercase !m-0 whitespace-nowrap text-[10px] md:text-xs px-3 py-2.5 md:px-5 md:py-3" data-i18n="resume">
                 Currículo
-            </a>
-            <a href="projects.html" class="pixel-button uppercase" data-i18n="projects">
-                Projetos
             </a>
         </div>
     </main>
 
     <script src="i18n.js"></script>
+    <script>
+        function toggleContactMenu(event) {
+            if (event) event.stopPropagation();
+            const dropdown = document.getElementById('contact-dropdown');
+            const arrow = document.getElementById('contact-arrow');
+            if (dropdown) {
+                const isExpanded = dropdown.classList.contains('menu-expanded');
+                if (isExpanded) {
+                    dropdown.classList.remove('menu-expanded');
+                    dropdown.style.maxHeight = '0px';
+                    dropdown.style.opacity = '0';
+                    if (arrow) arrow.style.transform = 'rotate(0deg)';
+                } else {
+                    dropdown.classList.add('menu-expanded');
+                    dropdown.style.maxHeight = '150px';
+                    dropdown.style.opacity = '1';
+                    if (arrow) arrow.style.transform = 'rotate(180deg)';
+                }
+            }
+        }
 
+        document.addEventListener('click', (event) => {
+            const dropdown = document.getElementById('contact-dropdown');
+            const toggleBtn = document.querySelector('[data-i18n="contact"]');
+            const arrow = document.getElementById('contact-arrow');
+            if (dropdown && dropdown.classList.contains('menu-expanded') && !dropdown.contains(event.target) && (!toggleBtn || !toggleBtn.contains(event.target))) {
+                dropdown.classList.remove('menu-expanded');
+                dropdown.style.maxHeight = '0px';
+                dropdown.style.opacity = '0';
+                if (arrow) arrow.style.transform = 'rotate(0deg)';
+            }
+        });
+    </script>
 
     <script>
         const canvas = document.getElementById('circuit-bg');

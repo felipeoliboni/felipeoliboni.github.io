@@ -22,14 +22,12 @@ O site foi construído utilizando tecnologias web modernas, mantendo a simplicid
   - Animação de fundo dinâmica com elementos de circuitos.
   - Estética pixelada e cores neon (Ciano e Magenta).
 - **Currículo Interativo**: Página dedicada detalhando experiências, educação e certificações.
-- **Portfólio de Projetos**: Destaques como Homelab (Proxmox, Docker, Prometheus) e Portal do Estudante (Node.js, SQL).
 - **Versão PDF**: Link direto para download do currículo em formato PDF.
 
 ## 📂 Estrutura do Projeto
 
 - `index.html`: Página principal de navegação.
 - `resume.html`: Detalhes profissionais e formação.
-- `projects.html`: Listagem de projetos técnicos e competências.
 - `i18n.js`: Motor de internacionalização e dicionário de traduções.
 
 ## 🛠️ Como Executar Localmente
